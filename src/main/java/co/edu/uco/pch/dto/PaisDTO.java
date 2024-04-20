@@ -3,6 +3,7 @@ package co.edu.uco.pch.dto;
 import java.util.UUID;
 
 import co.edu.uco.pch.crosscutting.helpers.TextHelper;
+import co.edu.uco.pch.crosscutting.helpers.UUIDHelper;
 
 
 public class PaisDTO {
@@ -22,7 +23,7 @@ public class PaisDTO {
 		return new PaisDTO();
 	} 
 	public final PaisDTO setid( final UUID id) {
-		this.id = id;
+		this.id = UUIDHelper.obtenerValorDefecto(id);
 		return this;
 	}
 	public final PaisDTO setNombre(final String nombre) {
@@ -30,10 +31,10 @@ public class PaisDTO {
 		return this;
 	}
 	public final UUID getid() {
-		return id;
+		return this.id;
 	}
 	public final String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 	
 }
