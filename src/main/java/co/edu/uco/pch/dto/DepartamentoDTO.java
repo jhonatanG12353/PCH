@@ -32,7 +32,7 @@ public class DepartamentoDTO {
 		return this;
 	}
 	public final DepartamentoDTO setPais( final PaisDTO pais) {
-		this.pais = ObjectHelper.obtenerValorDefecto(pais);
+		this.pais = ObjectHelper.getObjectHelper().obtenerValorDefecto(pais);
 		return this;
 	}
 	public final UUID getid() {

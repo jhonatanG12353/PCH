@@ -9,7 +9,8 @@ public final class TextHelper {
 	}
 
 	public static final boolean isNull (final String string) {
-		return string == null;
+		ObjectHelper.getObjectHelper();
+		return ObjectHelper.isNull(string);
 	}
 	public static final boolean isNullOrEmpty (final String string) {
 		return isNull (string)|| EMPTY.equals(applyTrim(string));

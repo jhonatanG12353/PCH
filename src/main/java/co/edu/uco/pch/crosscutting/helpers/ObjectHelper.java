@@ -1,29 +1,30 @@
 package co.edu.uco.pch.crosscutting.helpers;
 
-public class ObjectHelper {
+public final class ObjectHelper {
 	
-	public static final String VACIO="";
+	public static final Object VACIO="";
+	private static final ObjectHelper INSTANCE = new ObjectHelper();
 
 	private ObjectHelper() {
 		super();
+	}
+	public static final ObjectHelper getObjectHelper() {
+		return INSTANCE;
 	}
 	
 	public static final <O> boolean isNull(final O objeto) {
 		return objeto == null;
 	}
+	
 	public static final  <O> boolean isNuloOVacio(final O objeto) {
 		return isNull(objeto)|| VACIO.equals(objeto);
 	}
 
 
-
 	@SuppressWarnings("unchecked")
-	public static final  <O> O obtenerValorDefecto(final O objeto, final String valorDefecto) {		
-		return isNuloOVacio(objeto) ? (O) valorDefecto: objeto;
-		//TO DO: buscar la manera de como solucionar este casteo
+	public final  <O> O obtenerValorDefecto(final O objeto) {		
+		return isNuloOVacio(objeto) ? (O) VACIO : objeto;
 	}
-	public static final  <O> O obtenerValorDefecto(final O objeto) {		
-		return obtenerValorDefecto(objeto , VACIO);
-	}
+	
 
 }

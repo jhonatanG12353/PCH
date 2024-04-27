@@ -32,7 +32,7 @@ public class CiudadDTO {
 		return this;
 	}
 	public final CiudadDTO setDepartamento(final DepartamentoDTO departamento) {
-		this.departamento = ObjectHelper.obtenerValorDefecto(departamento);
+		this.departamento = ObjectHelper.getObjectHelper().obtenerValorDefecto(departamento);
 		return this;
 	}
 	public final UUID getid() {
