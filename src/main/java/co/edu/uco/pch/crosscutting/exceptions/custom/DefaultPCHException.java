@@ -10,6 +10,10 @@ public class DefaultPCHException extends  PCHException {
 	protected DefaultPCHException(String mensajeTecnico, String mensajeUsuario, Lugar lugar, Throwable excepcionRaiz) {
 		super(mensajeTecnico, mensajeUsuario, lugar, excepcionRaiz);
 	}
+	protected DefaultPCHException(String mensajeTecnico, String mensajeUsuario) {
+		super(mensajeTecnico, mensajeUsuario, Lugar.DEFAULT);
+	}
+	
 	
 	protected DefaultPCHException(String mensajeTecnico) {
 		super(mensajeTecnico, Lugar.DEFAULT);

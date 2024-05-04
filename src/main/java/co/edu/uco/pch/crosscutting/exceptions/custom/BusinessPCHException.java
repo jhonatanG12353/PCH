@@ -10,7 +10,9 @@ public class BusinessPCHException extends PCHException{
 	protected BusinessPCHException(String mensajeTecnico, String mensajeUsuario, Lugar lugar, Throwable excepcionRaiz) {
 		super(mensajeTecnico, mensajeUsuario, lugar, excepcionRaiz);
 	}
-	
+	protected BusinessPCHException(String mensajeTecnico, String mensajeUsuario) {
+		super(mensajeTecnico, mensajeUsuario, Lugar.BUSINESS);
+	}
 	protected BusinessPCHException(String mensajeTecnico) {
 		super(mensajeTecnico, Lugar.BUSINESS);
 	}

@@ -12,6 +12,10 @@ public class ControllerPCHException extends PCHException{
 		super(mensajeTecnico, mensajeUsuario, lugar, excepcionRaiz);
 	
 	}
+	protected ControllerPCHException(String mensajeTecnico, String mensajeUsuario) {
+		super(mensajeTecnico, mensajeUsuario, Lugar.CONTROLLER);
+	
+	}
 	
 	protected ControllerPCHException(String mensajeTecnico) {
 		super(mensajeTecnico, Lugar.CONTROLLER);

@@ -12,6 +12,10 @@ public class DTOPCHException extends PCHException{
 		super(mensajeTecnico, mensajeUsuario, lugar, excepcionRaiz);
 		
 	}
+	protected DTOPCHException(String mensajeTecnico, String mensajeUsuario) {
+		super(mensajeTecnico, mensajeUsuario, Lugar.DTO);
+		
+	}
 	protected DTOPCHException(String mensajeTecnico) {
 		super(mensajeTecnico, Lugar.DTO);
 		

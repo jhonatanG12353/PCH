@@ -16,13 +16,13 @@ public final class ObjectHelper {
 		return objeto == null;
 	}
 	
-	public static final  <O> boolean isNuloOVacio(final O objeto) {
+	public static final  <O> boolean isNuloOVacio( O objeto) {
 		return isNull(objeto)|| VACIO.equals(objeto);
 	}
 
 
 	@SuppressWarnings("unchecked")
-	public final  <O> O obtenerValorDefecto(final O objeto) {		
+	public final  <O> O obtenerValorDefecto( O objeto) {		
 		return isNuloOVacio(objeto) ? (O) VACIO : objeto;
 	}
 	

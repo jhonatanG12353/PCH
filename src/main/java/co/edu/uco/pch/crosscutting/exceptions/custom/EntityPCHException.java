@@ -10,6 +10,9 @@ public class EntityPCHException extends PCHException{
 	protected EntityPCHException(String mensajeTecnico, String mensajeUsuario, Lugar lugar, Throwable excepcionRaiz) {
 		super(mensajeTecnico, mensajeUsuario, lugar, excepcionRaiz);
 	}
+	protected EntityPCHException(String mensajeTecnico, String mensajeUsuario) {
+		super(mensajeTecnico, mensajeUsuario,Lugar.ENTITY);
+	}
 
 	protected EntityPCHException(String mensajeTecnico) {
 		super(mensajeTecnico, Lugar.ENTITY);

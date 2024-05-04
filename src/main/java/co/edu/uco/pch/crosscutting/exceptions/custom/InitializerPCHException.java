@@ -11,6 +11,9 @@ public class InitializerPCHException extends PCHException {
 			Throwable excepcionRaiz) {
 		super(mensajeTecnico, mensajeUsuario, lugar, excepcionRaiz);
 	}
+	protected InitializerPCHException(String mensajeTecnico, String mensajeUsuario) {
+		super(mensajeTecnico, mensajeUsuario, Lugar.INITIALIZER);
+	}
 
 	protected InitializerPCHException(String mensajeTecnico) {
 		super(mensajeTecnico, Lugar.INITIALIZER);
