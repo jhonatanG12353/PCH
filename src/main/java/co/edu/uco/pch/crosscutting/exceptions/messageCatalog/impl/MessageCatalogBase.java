@@ -19,6 +19,9 @@ public final class MessageCatalogBase  implements MessageCatalog{
 		mensajes.put(CodigoMensaje.M00002.getIdentificador(), new Mensaje(CodigoMensaje.M00002, "Se ha presentado un problema de llevar a cabo la operacion deseada..."));
 		mensajes.put(CodigoMensaje.M00003.getIdentificador(), new Mensaje(CodigoMensaje.M00003, "El identificador del mensaje \"${1}\" que se intento obtener no está en el catalogo de mensaje base"));
 		mensajes.put(CodigoMensaje.M00004.getIdentificador(), new Mensaje(CodigoMensaje.M00004, "El mensaje con identificador \"${1}\" que se intento obtener no está configurado para recibir en el catalogo base"));
+		mensajes.put(CodigoMensaje.M00005.getIdentificador(), new Mensaje(CodigoMensaje.M00005, "El mensaje con identificador \"${1}\" que se intento obtener no está configurado para residir en el catalogo Externo"));
+		mensajes.put(CodigoMensaje.M00006.getIdentificador(), new Mensaje(CodigoMensaje.M00006, "El identificador del mensaje \\\"${1}\\\" que se intento obtener no está en el catalogo de mensaje externo"));
+		
 	}
 
 	@Override
@@ -36,7 +39,7 @@ public final class MessageCatalogBase  implements MessageCatalog{
 		}
 		if(!codigo.esBase()) {
 			var mensajeUsuario = obtenerContenidoMensaje(CodigoMensaje.M00002);
-			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00004, codigo.getIdentificador());
+			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00005, codigo.getIdentificador());
 			throw new CrosscuttingPCHException (mensajeTecnico,mensajeUsuario);
 		}
 		if(!mensajes.containsKey(codigo.getIdentificador())) {
@@ -44,11 +47,8 @@ public final class MessageCatalogBase  implements MessageCatalog{
 			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00003, codigo.getIdentificador());
 			throw new CrosscuttingPCHException (mensajeTecnico,mensajeUsuario);
 		}
-		//TODO: asegurarse que si tiene parametros el contenido de mensaje se retorno con los parametro reemplazado
-		// {1}, {2}
-		return mensajes.get(codigo.getIdentificador());
+
+		
+		return mensajes.get( codigo.getIdentificador());
 	}
-
-	
-
 }

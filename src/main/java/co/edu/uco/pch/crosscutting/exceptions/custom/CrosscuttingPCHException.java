@@ -7,7 +7,7 @@ public class CrosscuttingPCHException extends PCHException {
 
 	private static final long serialVersionUID = 4526879296082603189L;
 
-	protected CrosscuttingPCHException(String mensajeTecnico, String mensajeUsuario, Lugar lugar,
+	public CrosscuttingPCHException(String mensajeTecnico, String mensajeUsuario, Lugar lugar,
 			Throwable excepcionRaiz) {
 		super(mensajeTecnico, mensajeUsuario, lugar, excepcionRaiz);
 	}
@@ -15,7 +15,7 @@ public class CrosscuttingPCHException extends PCHException {
 		super(mensajeTecnico, mensajeUsuario, Lugar.CROSSCUTTING );
 	}
 	
-	protected CrosscuttingPCHException(String mensajeTecnico) {
+	public CrosscuttingPCHException(String mensajeTecnico) {
 		super(mensajeTecnico, Lugar.CROSSCUTTING);
 	}
 
