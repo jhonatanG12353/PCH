@@ -19,6 +19,9 @@ public final class ObjectHelper {
 		return Objects.isNull(objeto);
 	}
 
+	public final  <O> O obtenerValorDefecto( O objeto , O objeto2) {		
+		return isNull(objeto) ?   null  : objeto2;
+	}
 	public final  <O> O obtenerValorDefecto( O objeto) {		
 		return isNull(objeto) ?   null  : objeto;
 	}

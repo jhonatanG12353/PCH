@@ -14,6 +14,9 @@ public class CrosscuttingPCHException extends PCHException {
 	public CrosscuttingPCHException(String mensajeTecnico, String mensajeUsuario) {
 		super(mensajeTecnico, mensajeUsuario, Lugar.CROSSCUTTING );
 	}
+	public CrosscuttingPCHException(String mensajeTecnico, String mensajeUsuario, Throwable excepcioRaiz) {
+		super(mensajeTecnico, mensajeUsuario, Lugar.CROSSCUTTING, excepcioRaiz );
+	}
 	
 	public CrosscuttingPCHException(String mensajeTecnico) {
 		super(mensajeTecnico, Lugar.CROSSCUTTING);
