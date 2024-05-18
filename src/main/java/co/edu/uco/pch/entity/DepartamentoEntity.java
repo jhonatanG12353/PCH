@@ -12,10 +12,10 @@ public class DepartamentoEntity {
 	private PaisEntity pais;
 	
 	
-	private DepartamentoEntity() {
+	public DepartamentoEntity() {
 		super();
 	}
-	private DepartamentoEntity(final UUID id, final String nombre, final PaisEntity pais) {
+	public DepartamentoEntity(final UUID id, final String nombre, final PaisEntity pais) {
 		setid(id);
 		setNombre(nombre);
 		setPais(pais);

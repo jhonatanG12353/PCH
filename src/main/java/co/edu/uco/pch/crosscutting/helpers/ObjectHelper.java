@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public final class ObjectHelper {
 	
+	public static final String VACIO="";
 	
 	private static final ObjectHelper INSTANCE = new ObjectHelper();
 	
@@ -24,6 +25,9 @@ public final class ObjectHelper {
 	}
 	public final  <O> O obtenerValorDefecto( O objeto) {		
 		return isNull(objeto) ?   null  : objeto;
+	}
+	public static final <O> boolean esNulooVacio(final O objeto) {
+		return objeto == null && objeto == VACIO;
 	}
 
 }

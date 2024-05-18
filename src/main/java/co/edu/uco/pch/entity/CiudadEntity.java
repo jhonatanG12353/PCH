@@ -11,11 +11,11 @@ public class CiudadEntity {
 	private String nombre;
 	private DepartamentoEntity departamento;
 	
-	private CiudadEntity() {
+	public CiudadEntity() {
 		super();
 	}
 	
-	private CiudadEntity(final UUID id, final String nombre, final DepartamentoEntity departamento) {
+	public  CiudadEntity(final UUID id, final String nombre, final DepartamentoEntity departamento) {
 		setid(id);
 		setNombre(nombre);
 		setDepartamento(departamento);

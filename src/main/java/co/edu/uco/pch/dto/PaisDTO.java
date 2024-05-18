@@ -10,17 +10,17 @@ public class PaisDTO {
 	private UUID id;
 	private String nombre;
 	
-	private PaisDTO()
+	private PaisDTO(final UUID id, final String nombre)
 	{
-		super();
-	}
-	private PaisDTO(final UUID id,final String nombre) {
 		setid(id);
 		setNombre(nombre);
+	}
+	public PaisDTO build (final UUID id, final String nombre) {
 		
+		return new PaisDTO(id,nombre);
 	}
 	public static final PaisDTO build () {
-		return new PaisDTO();
+		return new PaisDTO(UUIDHelper.generarUUIDAleatorio(),TextHelper.EMPTY);
 	} 
 	public final PaisDTO setid( final UUID id) {
 		this.id = UUIDHelper.obtenerValorDefecto(id);

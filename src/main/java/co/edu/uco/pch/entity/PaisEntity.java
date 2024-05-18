@@ -10,11 +10,11 @@ public class PaisEntity {
 	private UUID id;
 	private String nombre;
 	
-	private PaisEntity()
+	public PaisEntity()
 	{
 		super();
 	}
-	private PaisEntity(final UUID id,final String nombre) {
+	public PaisEntity(final UUID id,final String nombre) {
 		setid(id);
 		setNombre(nombre);
 		
