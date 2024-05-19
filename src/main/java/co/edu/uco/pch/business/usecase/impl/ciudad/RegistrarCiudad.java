@@ -2,16 +2,13 @@ package co.edu.uco.pch.business.usecase.impl.ciudad;
 
 import java.util.UUID;
 
-import org.springframework.boot.autoconfigure.kafka.SslBundleSslEngineFactory;
-
-import co.edu.uco.pch.business.assembler.entity.impl.CiudadAssemblerEntity;
 import co.edu.uco.pch.business.assembler.entity.impl.DepartamentoAssemblerEntity;
 import co.edu.uco.pch.business.domain.CiudadDomain;
 import co.edu.uco.pch.business.usecase.UseCaseWithoutReturn;
 import co.edu.uco.pch.crosscutting.exceptions.custom.BusinessPCHException;
 import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.pch.crosscutting.helpers.UUIDHelper;
-import co.edu.uco.pch.data.dao.entity.DAOFactory;
+import co.edu.uco.pch.data.dao.factory.DAOFactory;
 import co.edu.uco.pch.entity.CiudadEntity;
 import co.edu.uco.pch.entity.DepartamentoEntity;
 
@@ -43,7 +40,7 @@ public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain>
 	}
 	
 	private final UUID generarIdentificadorCiudad() {
-		UUID id;
+		UUID id = UUIDHelper.generarUUIDAleatorio();
 		boolean existeId= true;
 		while(existeId) {
 			id  = UUIDHelper.generarUUIDAleatorio();

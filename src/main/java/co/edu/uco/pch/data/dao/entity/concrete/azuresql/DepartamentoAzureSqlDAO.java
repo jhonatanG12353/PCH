@@ -19,7 +19,7 @@ import co.edu.uco.pch.entity.PaisEntity;
 public class DepartamentoAzureSqlDAO extends SqlConnection implements DepartamentoDAO{
 	
 	
-	protected DepartamentoAzureSqlDAO(Connection conexion) {
+	public DepartamentoAzureSqlDAO(Connection conexion) {
 		super(conexion);
 	}
 
