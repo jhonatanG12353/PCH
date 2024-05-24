@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 import co.edu.uco.pch.crosscutting.exceptions.custom.DataPCHException;
+import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.pch.crosscutting.helpers.TextHelper;
 import co.edu.uco.pch.data.dao.entity.DepartamentoDAO;
@@ -47,13 +49,13 @@ public class DepartamentoAzureSqlDAO extends SqlConnection implements Departamen
 				        }				
 				}
 				 catch (final SQLException excepcion) {
-			        var mensajeUsuario = "Se ha presentado un problema tratando de consultar las ciudades...";
-			        var mensajeTecnico = "Se ha presentado un problema de tipo SQLException en el método consultar de la clase DepartamentoAzureSqlDAO tratando de realizar la consulta de departamento \"${1}\". Por favor, revise la traza completa del problema presentado para identificar lo que sucedió...";
+					 var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00027);
+			        var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00028);
 			        throw new DataPCHException(mensajeUsuario, mensajeTecnico, excepcion);
 			    } 
 				catch (final Exception excepcion) {
-			        var mensajeUsuario = "Se ha presentado un problema tratando de consultar las ciudades...";
-			        var mensajeTecnico = "Se ha presentado un problema de tipo Exception en el método consultar de la clase DepartamentoAzureSqlDAO tratando de realizar la consulta de departamento \"${1}\". Por favor, revise la traza completa del problema presentado para identificar lo que sucedió...";
+					var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00027);
+			        var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00029);
 			        throw new DataPCHException(mensajeUsuario, mensajeTecnico, excepcion);
 			    }
 			

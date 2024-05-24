@@ -34,5 +34,6 @@ public class PCHException extends RuntimeException {
 		this.lugar= ObjectHelper.getObjectHelper().obtenerValorDefecto(lugar);
 	}
 
+
 	
 }

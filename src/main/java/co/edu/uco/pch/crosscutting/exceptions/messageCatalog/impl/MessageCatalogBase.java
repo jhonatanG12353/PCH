@@ -57,11 +57,46 @@ public final class MessageCatalogBase  implements MessageCatalog{
  
 		mensajes.put(CodigoMensaje.M00020.getIdentificador(), new Mensaje(CodigoMensaje.M00020,
 				"Se ha intentado iniciar una transacción con una conexión SQL cerrada..."));
-		mensajes.put(CodigoMensaje.M00021.getIdentificador(), new Mensaje(CodigoMensaje.M00022,
+		mensajes.put(CodigoMensaje.M00021.getIdentificador(), new Mensaje(CodigoMensaje.M00021,
 				"Se ha presentado un problema tratando de iniciar una transacción SQL con la fuente de información deseada..."));
 		mensajes.put(CodigoMensaje.M00022.getIdentificador(), new Mensaje(CodigoMensaje.M00022,
 				"Se ha presentado un problema INESPERADO tratando de iniciar una transacción SQL con la fuente de información deseada..."));
-		
+		mensajes.put(CodigoMensaje.M00023.getIdentificador(), new Mensaje(CodigoMensaje.M00023,
+				"No es posible crear el DAO deseado con una conexion cerrada"));
+		mensajes.put(CodigoMensaje.M00024.getIdentificador(), new Mensaje(CodigoMensaje.M00024,
+				"Se ha presentado un problema tratando de consultar los paises..."));
+		mensajes.put(CodigoMensaje.M00025.getIdentificador(), new Mensaje(CodigoMensaje.M00025,
+				"Se ha presentado un problema de tipo SQLException en el método consultar de la clase PaisAzureSqlDAO tratando de realizar la consulta de pais \\\"${1}\\\". Por favor, revise la traza completa del problema presentado para identificar lo que sucedió..."));
+		mensajes.put(CodigoMensaje.M00026.getIdentificador(), new Mensaje(CodigoMensaje.M00026,
+				"Se ha presentado un problema de tipo Exception en el método consultar de la clase PaisAzureSqlDAO tratando de realizar la consulta de pais \\\"${1}\\\". Por favor, revise la traza completa del problema presentado para identificar lo que sucedió..."));
+		mensajes.put(CodigoMensaje.M00027.getIdentificador(), new Mensaje(CodigoMensaje.M00027,
+				"Se ha presentado un problema tratando de consultar los departamentos..."));
+		mensajes.put(CodigoMensaje.M00028.getIdentificador(), new Mensaje(CodigoMensaje.M00028,
+				"Se ha presentado un problema de tipo SQLException en el método consultar de la clase DepartamentoAzureSqlDAO tratando de realizar la consulta de departamento \\\"${1}\\\". Por favor, revise la traza completa del problema presentado para identificar lo que sucedió..."));
+		mensajes.put(CodigoMensaje.M00029.getIdentificador(), new Mensaje(CodigoMensaje.M00029,
+				"Se ha presentado un problema de tipo Exception en el método consultar de la clase DepartamentoAzureSqlDAO tratando de realizar la consulta de departamento \\\"${1}\\\". Por favor, revise la traza completa del problema presentado para identificar lo que sucedió..."));
+		mensajes.put(CodigoMensaje.M00030.getIdentificador(), new Mensaje(CodigoMensaje.M00030,
+				"Se ha presentado un problema tratando de crear la ciudad \\\"${1}\\\". Por favor intente de nuevo y si el problema persiste contacte al administrador"));
+		mensajes.put(CodigoMensaje.M00031.getIdentificador(), new Mensaje(CodigoMensaje.M00031,
+				"Se ha presentado una excepcion de tipo SQL exception tratando realizar  el insert de la ciudad \\\"${1}\\\" en la tabla \\\"Pais\\\" de la tabla AzureSQL, para mas detalles, revise de forma completa la excepcion raíz presentada..."));
+		mensajes.put(CodigoMensaje.M00032.getIdentificador(), new Mensaje(CodigoMensaje.M00032,
+				"Se ha presentado  un problema INESPERADO con una excepcion de tipo SQL exception tratando realizar  el insert de la ciudad \\\"${1}\\\" en la tabla \\\"Pais\\\" de la tabla AzureSQL, para mas detalles, revise de forma completa la excepcion raíz presentada..."));
+		mensajes.put(CodigoMensaje.M00033.getIdentificador(), new Mensaje(CodigoMensaje.M00033,
+				"Se ha presentado un problema tratando de obtener la conexión con la base de datos wednesday en el servidor de bases de datos wednesday.database.windows.net. Por favor revise la traza de errores para identificar y solucionar el problema..."));
+		mensajes.put(CodigoMensaje.M00034.getIdentificador(), new Mensaje(CodigoMensaje.M00034,
+				"Se ha presentado un problema INESPERADO tratando de obtener la conexión con la base de datos wednesday en el servidor de bases de datos wednesday.database.windows.net. Por favor revise la traza de errores para identificar y solucionar el problema..."));
+		mensajes.put(CodigoMensaje.M00035.getIdentificador(), new Mensaje(CodigoMensaje.M00035,
+				"Se ha presentado un problema tratando de consultar los paises..."));
+		mensajes.put(CodigoMensaje.M00036.getIdentificador(), new Mensaje(CodigoMensaje.M00036,
+				"Se ha presentado un problema tratando de consultar los paises..."));
+		mensajes.put(CodigoMensaje.M00037.getIdentificador(), new Mensaje(CodigoMensaje.M00037,
+				"Se ha presentado un problema tratando de consultar los paises..."));
+		mensajes.put(CodigoMensaje.M00038.getIdentificador(), new Mensaje(CodigoMensaje.M00038,
+				"Se ha presentado un problema tratando de consultar los paises..."));
+		mensajes.put(CodigoMensaje.M00039.getIdentificador(), new Mensaje(CodigoMensaje.M00039,
+				"Se ha presentado un problema tratando de consultar los paises..."));
+		mensajes.put(CodigoMensaje.M00040.getIdentificador(), new Mensaje(CodigoMensaje.M00040,
+				"Se ha presentado un problema tratando de consultar los paises..."));
 	}
 
 	@Override

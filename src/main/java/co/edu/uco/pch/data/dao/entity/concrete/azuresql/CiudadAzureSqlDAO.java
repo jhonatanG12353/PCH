@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 import co.edu.uco.pch.crosscutting.exceptions.custom.DataPCHException;
+import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.pch.crosscutting.helpers.TextHelper;
 import co.edu.uco.pch.crosscutting.helpers.UUIDHelper;
@@ -38,13 +40,13 @@ public final class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO 
 			sentenciaSqlPreparada.executeUpdate();
 			
 		} catch(SQLException exception) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de crear la ciudad \"${1}\". Por favor intente de nuevo y si el problema persiste contacte al administrador";
-			var mensajeTecnico = "Se ha presentado una excepcion de tipo SQL exception tratando realizar  el insert de la ciudad \"${1}\" en la tabla \"Pais\" de la tabla AzureSQL, para mas detalles, revise de forma completa la excepcion raíz presentada... ";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00030);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00031);
 			throw new DataPCHException(mensajeUsuario, mensajeTecnico, exception);
 		}
 		catch(Exception exception) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de crear la ciudad \"${1}\". Por favor intente de nuevo y si el problema persiste contacte al administrador";
-			var mensajeTecnico = "Se ha presentado  un problema INESPERADO con una excepcion de tipo SQL exception tratando realizar  el insert de la ciudad \"${1}\" en la tabla \"Pais\" de la tabla AzureSQL, para mas detalles, revise de forma completa la excepcion raíz presentada... ";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00030);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00032);
 			throw new DataPCHException(mensajeUsuario, mensajeTecnico, exception);
 		}
 		

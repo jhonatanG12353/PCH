@@ -2,6 +2,8 @@ package co.edu.uco.pch.business.assembler.dto.impl;
 
 import static co.edu.uco.pch.crosscutting.helpers.ObjectHelper.getObjectHelper;
 
+
+
 import co.edu.uco.pch.business.assembler.dto.AssemblerDTO;
 import co.edu.uco.pch.business.domain.CiudadDomain;
 import co.edu.uco.pch.business.domain.DepartamentoDomain;
@@ -29,10 +31,12 @@ public class CiudadAssemblerDTO implements AssemblerDTO<CiudadDomain, CiudadDTO>
 	}
 
 	@Override
-	public CiudadDTO toDTO(CiudadDomain domain) {
+	public  CiudadDTO toDTO(CiudadDomain domain) {
 		var ciudadDomainTmp = getObjectHelper().obtenerValorDefecto(domain, CiudadDomain.build());
 		var departamentoDTO = departamentoAssembler.toDTO(ciudadDomainTmp.getDepartamento());
 		return CiudadDTO.build().setid(ciudadDomainTmp.getId()).setNombre(ciudadDomainTmp.getNombre()).setDepartamento(departamentoDTO);
 	}
+	
+
 
 }

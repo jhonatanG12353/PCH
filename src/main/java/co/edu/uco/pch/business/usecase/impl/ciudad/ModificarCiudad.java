@@ -6,6 +6,8 @@ import co.edu.uco.pch.business.assembler.entity.impl.DepartamentoAssemblerEntity
 import co.edu.uco.pch.business.domain.CiudadDomain;
 import co.edu.uco.pch.business.usecase.UseCaseWithoutReturn;
 import co.edu.uco.pch.crosscutting.exceptions.custom.BusinessPCHException;
+import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.pch.crosscutting.helpers.TextHelper;
 import co.edu.uco.pch.crosscutting.helpers.UUIDHelper;
@@ -19,8 +21,8 @@ public class ModificarCiudad implements UseCaseWithoutReturn<CiudadDomain> {
 	
 	public ModificarCiudad (final DAOFactory factory){
 		 if(ObjectHelper.isNull(factory)) {
-			 var mensajeUsuario = "Se ha presentado un prolema tratando de llevar a cabo la modificacion de ciudad";
-			 var mensajeTecnico= "El dao factory para modificar la ciudad llego nulo";
+			 var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00051);
+			 var mensajeTecnico= MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00054);
 			 throw new BusinessPCHException(mensajeUsuario, mensajeTecnico);
 		 }
 		 this.factory = factory;
@@ -37,7 +39,7 @@ public class ModificarCiudad implements UseCaseWithoutReturn<CiudadDomain> {
 		var ciudadEntity = CiudadEntity.build().setNombre(nombreCiudad).setDepartamento(DepartamentoEntity.build().setId(idDepartamento));
 		var resultados = factory.getCiudadDAO().consultar(ciudadEntity);
 		if(!resultados.isEmpty()) {
-			var mensajeUsuario = "Ya existe una ciudad con el nombre \"${1}\" asociado al departamento deseado";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00055);
 			throw new BusinessPCHException(mensajeUsuario);
 		}
 	}
@@ -62,19 +64,19 @@ public class ModificarCiudad implements UseCaseWithoutReturn<CiudadDomain> {
 	
 	private final void validarLongitud(final String dato) {
 		if(TextHelper.longitudMaximaValida(dato,50)) {
-			var mensajeUsuario = "La longitud del codigo del tipo de identificacion no es valida. la longitud Maxima son 50 caracteres";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00056);
 			throw new BusinessPCHException(mensajeUsuario);
 		}
 	}
 	private final void validarObligatoriedad(final String dato) {
 		if(TextHelper.isNull(dato)) {
-			var mensajeUsuario = "Es necesarios que ingreses \"${1}\" para optener la transacción...";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00057);
 			throw new BusinessPCHException(mensajeUsuario);
 		}
 	}
 	private final void validarFormato(final String dato) {
 		if(!TextHelper.contieneSoloLetras(dato)) {
-			var mensajeUsuario = "El dato \"${1}\" solo puede contener letras...";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00058);
 			throw new BusinessPCHException(mensajeUsuario);
 		}
 	}

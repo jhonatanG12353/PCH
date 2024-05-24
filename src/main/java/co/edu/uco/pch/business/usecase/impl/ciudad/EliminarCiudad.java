@@ -6,6 +6,8 @@ import java.util.UUID;
 import co.edu.uco.pch.business.domain.CiudadDomain;
 import co.edu.uco.pch.business.usecase.UseCaseWithoutReturn;
 import co.edu.uco.pch.crosscutting.exceptions.custom.BusinessPCHException;
+import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.pch.crosscutting.helpers.UUIDHelper;
 import co.edu.uco.pch.data.dao.factory.DAOFactory;
@@ -17,8 +19,8 @@ public class EliminarCiudad implements UseCaseWithoutReturn<CiudadDomain>{
 	
 	public EliminarCiudad (final DAOFactory factory){
 		 if(ObjectHelper.isNull(factory)) {
-			 var mensajeUsuario = "Se ha presentado un prolema tratando de llevar a cabo el eliminar de ciudad";
-			 var mensajeTecnico= "El dao factory para eliminar la ciudad llego nulo";
+			 var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00052);
+			 var mensajeTecnico= MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00053);
 			 throw new BusinessPCHException(mensajeUsuario, mensajeTecnico);
 		 }
 		 this.factory = factory;

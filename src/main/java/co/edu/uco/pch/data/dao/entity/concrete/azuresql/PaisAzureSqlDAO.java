@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 import co.edu.uco.pch.crosscutting.exceptions.custom.DataPCHException;
+import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.pch.crosscutting.helpers.TextHelper;
 import co.edu.uco.pch.data.dao.entity.PaisDAO;
@@ -45,12 +47,12 @@ public class PaisAzureSqlDAO extends SqlConnection implements PaisDAO {
 				}
 			}
 		} catch (final SQLException excepcion) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de consultar los paises...";
-			var mensajeTecnico = "Se ha presentado un problema de tipo SQLException en el método consultar de la clase PaisAzureSqlDAO tratando de realizar la consulta de pais \"${1}\". Por favor, revise la traza completa del problema presentado para identificar lo que sucedió...";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00024);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00025);
 			throw new DataPCHException(mensajeUsuario, mensajeTecnico, excepcion);
 		} catch (final Exception excepcion) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de consultar las ciudades...";
-			var mensajeTecnico = "Se ha presentado un problema de tipo Exception en el método consultar de la clase PaisAzureSqlDAO tratando de realizar la consulta de pais \"${1}\". Por favor, revise la traza completa del problema presentado para identificar lo que sucedió...";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00024);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00026);
 			throw new DataPCHException(mensajeUsuario, mensajeTecnico, excepcion);
 		}
 
