@@ -38,7 +38,7 @@ public class DepartamentoAzureSqlDAO extends SqlConnection implements Departamen
 		
 				            while (resultadoConsulta.next()) {
 				            	DepartamentoEntity departamento = new DepartamentoEntity();
-				            	departamento.setid((UUID) resultadoConsulta.getObject("id"));
+				            	departamento.setId((UUID) resultadoConsulta.getObject("id"));
 				            	departamento.setNombre(resultadoConsulta.getString("nombre"));
 				            	departamento.setPais((PaisEntity)resultadoConsulta.getObject("departamento"));
 				                
@@ -67,10 +67,10 @@ public class DepartamentoAzureSqlDAO extends SqlConnection implements Departamen
 		sentenciaSql.append("SELECT id, nombre, pais FROM Departamento ");
 		if(!ObjectHelper.isNull(data)) {
 			
-			if(!ObjectHelper.esNulooVacio(data.getid())) {
+			if(!ObjectHelper.esNulooVacio(data.getId())) {
 				sentenciaSql.append(operadorCondicional).append(" id = ? ");
 				operadorCondicional = " AND";
-				parametros.add(data.getid());
+				parametros.add(data.getId());
 			}
 			if(!TextHelper.isNullOrEmpty(data.getNombre())) {
 				sentenciaSql.append(operadorCondicional).append(" nombre = ? ");

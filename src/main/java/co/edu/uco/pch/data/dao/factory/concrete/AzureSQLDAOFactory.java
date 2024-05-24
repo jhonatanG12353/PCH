@@ -3,6 +3,9 @@ package co.edu.uco.pch.data.dao.factory.concrete;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import co.edu.uco.pch.crosscutting.exceptions.custom.DataPCHException;
+import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.edu.uco.pch.crosscutting.helpers.SQLHelper;
 import co.edu.uco.pch.data.dao.entity.CiudadDAO;
 import co.edu.uco.pch.data.dao.entity.DepartamentoDAO;
@@ -20,17 +23,21 @@ public final class AzureSQLDAOFactory extends SqlConnection implements DAOFactor
 		abrirConexion();
 	}
 
-	@Override
 	public void abrirConexion() {
+		final String connectionUrl = "jdbc:sqlserver://wednesday.database.windows.net:1433;databaseName=friday;user=fridayDmlUser;password=fr1d4yus3r!";
 		try {
-			String connectionString = "jdbc://<server>:<port>.....";
-			setConexion(DriverManager.getConnection(connectionString));
+			setConexion(DriverManager.getConnection(connectionUrl));
 		} catch (final SQLException excepcion) {
-			// TODO: handle exception
-		} catch (final Exception excepcion) {
-			// TODO: handle exception
-		}
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
+			var mensajeTecnico = "Se ha presentado un problema tratando de obtener la conexión con la base de datos wednesday en el servidor de bases de datos wednesday.database.windows.net. Por favor revise la traza de errores para identificar y solucionar el problema...";
 
+			throw new DataPCHException(mensajeTecnico, mensajeUsuario, excepcion);
+		} catch (final Exception excepcion) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
+			var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de obtener la conexión con la base de datos wednesday en el servidor de bases de datos wednesday.database.windows.net. Por favor revise la traza de errores para identificar y solucionar el problema...";
+
+			throw new DataPCHException(mensajeTecnico, mensajeUsuario, excepcion);
+		}
 	}
 
 	@Override

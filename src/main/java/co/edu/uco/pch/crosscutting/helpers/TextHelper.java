@@ -1,10 +1,12 @@
 package co.edu.uco.pch.crosscutting.helpers;
 
+
 public final class TextHelper {
 	
 	public static final String EMPTY = "";
 	public static final String UNDERLINE = "_";
-	
+	private static final String PATTER_SOLO_LETRAS="^[A-Za-záéíóúÁÉÍÓÚ]+$";
+	private static final String PATTER_SOLO_LETRAS_DIGITOS_ESPACIOS="^[0-9A-Za-záéíóúÁÉÍÓÚ]+$";
 
 	
 	private TextHelper() {
@@ -28,8 +30,18 @@ public final class TextHelper {
 	public static final String applyTrim(final String string) {
 		return getDefaultValue(string).trim();
 	}
-	
-
+	public static boolean longitudMinimaValida (final String valor, final int longitud) {
+		return applyTrim(valor).length()>= longitud;
+	}
+	public static boolean longitudMaximaValida (final String valor, final int longitud) {
+		return applyTrim(valor).length()<= longitud;
+	}
+	public static final boolean contieneSoloLetras(final String valor) {
+		return getDefaultValue(valor).matches(PATTER_SOLO_LETRAS);
+	}
+	public static final boolean contieneSoloLetrasDigitosEspacios(final String valor) {
+		return getDefaultValue(valor).matches(PATTER_SOLO_LETRAS_DIGITOS_ESPACIOS);
+	}
 
 
 	public static final String concatenate ( final String... strings) {

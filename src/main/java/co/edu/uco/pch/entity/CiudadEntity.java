@@ -12,7 +12,9 @@ public class CiudadEntity {
 	private DepartamentoEntity departamento;
 	
 	public CiudadEntity() {
-		super();
+		setid(UUIDHelper.generarUUIDDefecto());
+		setNombre(TextHelper.EMPTY);
+		setDepartamento(DepartamentoEntity.build());
 	}
 	
 	public  CiudadEntity(final UUID id, final String nombre, final DepartamentoEntity departamento) {
@@ -32,7 +34,7 @@ public class CiudadEntity {
 		return this;
 	}
 	public final CiudadEntity setDepartamento(final DepartamentoEntity departamento) {
-		this.departamento = ObjectHelper.getObjectHelper().obtenerValorDefecto(departamento);
+		this.departamento = ObjectHelper.getObjectHelper().obtenerValorDefecto(departamento, new DepartamentoEntity());
 		return this;
 	}
 	public final UUID getid() {

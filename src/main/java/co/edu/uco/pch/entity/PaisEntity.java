@@ -9,32 +9,37 @@ import co.edu.uco.pch.crosscutting.helpers.UUIDHelper;
 public class PaisEntity {
 	private UUID id;
 	private String nombre;
-	
-	public PaisEntity()
-	{
-		super();
+
+	public PaisEntity() {
+		setId(UUIDHelper.generarUUIDDefecto());
+		setNombre(TextHelper.EMPTY);
 	}
-	public PaisEntity(final UUID id,final String nombre) {
-		setid(id);
+
+	public PaisEntity(final UUID id, final String nombre) {
+		setId(id);
 		setNombre(nombre);
-		
 	}
-	public static final PaisEntity build () {
+
+	public static final PaisEntity build() {
 		return new PaisEntity();
-	} 
-	public final PaisEntity setid( final UUID id) {
-		this.id = UUIDHelper.obtenerValorDefecto(id);
+	}
+
+	public final UUID getId() {
+		return id;
+	}
+
+	public final PaisEntity setId(final UUID id) {
+		this.id = id;
 		return this;
 	}
-	public final PaisEntity setNombre(final String nombre) {
-		this.nombre  = TextHelper.applyTrim(nombre);
-		return this;
-	}
-	public final UUID getid() {
-		return this.id;
-	}
+
 	public final String getNombre() {
-		return this.nombre;
+		return nombre;
+	}
+
+	public final PaisEntity setNombre(final String nombre) {
+		this.nombre = TextHelper.applyTrim(nombre);
+		return this;
 	}
 	
 }

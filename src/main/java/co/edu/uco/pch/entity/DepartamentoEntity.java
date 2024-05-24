@@ -10,41 +10,49 @@ public class DepartamentoEntity {
 	private UUID id;
 	private String nombre;
 	private PaisEntity pais;
-	
-	
+
 	public DepartamentoEntity() {
-		super();
+		setId(UUIDHelper.generarUUIDDefecto());
+		setNombre(TextHelper.EMPTY);
+		setPais(PaisEntity.build());
 	}
+
 	public DepartamentoEntity(final UUID id, final String nombre, final PaisEntity pais) {
-		setid(id);
+		setId(id);
 		setNombre(nombre);
 		setPais(pais);
 	}
-	public static final DepartamentoEntity build () {
+
+	public static final DepartamentoEntity build() {
 		return new DepartamentoEntity();
-	} 
-	public final DepartamentoEntity setid( final UUID id) {
-		this.id = UUIDHelper.obtenerValorDefecto(id);
+	}
+
+	public final UUID getId() {
+		return id;
+	}
+
+	public final DepartamentoEntity setId(final UUID id) {
+		this.id = id;
 		return this;
 	}
-	public final DepartamentoEntity setNombre(final String nombre) {
-		this.nombre  = TextHelper.applyTrim(nombre);
-		return this;
-	}
-	public final DepartamentoEntity setPais( final PaisEntity pais) {
-		this.pais = ObjectHelper.getObjectHelper().obtenerValorDefecto(pais);
-		return this;
-	}
-	public final UUID getid() {
-		return this.id;
-	}
+
 	public final String getNombre() {
-		return this.nombre;
+		return nombre;
 	}
+
+	public final DepartamentoEntity setNombre(final String nombre) {
+		this.nombre = TextHelper.applyTrim(nombre);
+		return this;
+	}
+
 	public final PaisEntity getPais() {
-		return this.pais;
+		return pais;
 	}
-	
+
+	public final DepartamentoEntity setPais(final PaisEntity pais) {
+		this.pais = ObjectHelper.getObjectHelper().obtenerValorDefecto(pais, new PaisEntity());
+		return this;
+	}
 
 	
 	

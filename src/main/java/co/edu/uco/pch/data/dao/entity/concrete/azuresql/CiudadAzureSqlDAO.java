@@ -33,7 +33,7 @@ public final class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO 
 		try (final PreparedStatement sentenciaSqlPreparada = getConexion().prepareStatement(sentenciaSql.toString())){
 			sentenciaSqlPreparada.setObject(1, data.getid());
 			sentenciaSqlPreparada.setString(2, data.getNombre());
-			sentenciaSqlPreparada.setObject(3, data.getDepartamento().getid());
+			sentenciaSqlPreparada.setObject(3, data.getDepartamento().getId());
 			
 			sentenciaSqlPreparada.executeUpdate();
 			
@@ -104,7 +104,7 @@ public final class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO 
 				parametros.add(data.getNombre());
 			}
 			
-			if(!UUIDHelper.isNull(data.getDepartamento().getid())) {
+			if(!UUIDHelper.isNull(data.getDepartamento().getId())) {
 				sentenciaSql.append(operadorCondicional).append(" departamento = ? ");
 				parametros.add(data.getDepartamento());
 			}
@@ -126,7 +126,7 @@ public final class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO 
 		try(final var sentenciaPreparada = getConexion().prepareStatement(sentenciaSql.toString()) ) {
 	        
 	        sentenciaPreparada.setString(1, data.getNombre());
-	        sentenciaPreparada.setObject(2, data.getDepartamento().getid());
+	        sentenciaPreparada.setObject(2, data.getDepartamento().getId());
 	        sentenciaPreparada.setObject(3, data.getid());
 	        
 	        

@@ -38,7 +38,7 @@ public class PaisAzureSqlDAO extends SqlConnection implements PaisDAO {
 
 				while (resultadoConsulta.next()) {
 					PaisEntity departamento = new PaisEntity();
-					departamento.setid((UUID) resultadoConsulta.getObject("id"));
+					departamento.setId((UUID) resultadoConsulta.getObject("id"));
 					departamento.setNombre(resultadoConsulta.getString("nombre"));
 
 					resultado.add(departamento);
@@ -65,10 +65,10 @@ public class PaisAzureSqlDAO extends SqlConnection implements PaisDAO {
 		sentenciaSql.append("SELECT id, nombre FROM Pais ");
 		if (!ObjectHelper.isNull(data)) {
 
-			if (!ObjectHelper.esNulooVacio(data.getid())) {
+			if (!ObjectHelper.esNulooVacio(data.getId())) {
 				sentenciaSql.append(operadorCondicional).append(" id = ? ");
 				operadorCondicional = " AND";
-				parametros.add(data.getid());
+				parametros.add(data.getId());
 			}
 			if (!TextHelper.isNullOrEmpty(data.getNombre())) {
 				sentenciaSql.append(operadorCondicional).append(" nombre = ? ");

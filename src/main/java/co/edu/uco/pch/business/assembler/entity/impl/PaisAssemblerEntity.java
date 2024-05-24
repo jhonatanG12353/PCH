@@ -21,13 +21,13 @@ public class PaisAssemblerEntity  implements AssemblerEntity<PaisDomain,PaisEnti
 	@Override
 	public PaisDomain toDomain(PaisEntity data) {
 		var paisEntityTmp = getObjectHelper().obtenerValorDefecto(data, PaisEntity.build());
-		return PaisDomain.build(paisEntityTmp.getid(),paisEntityTmp.getNombre());
+		return PaisDomain.build(paisEntityTmp.getId(),paisEntityTmp.getNombre());
 	}
 
 	@Override
 	public PaisEntity toEntity(PaisDomain domain) {
 		var PaisDomainTmp = getObjectHelper().obtenerValorDefecto(domain, PaisDomain.build());
-		return PaisEntity.build().setid(PaisDomainTmp.getId()).setNombre(PaisDomainTmp.getNombre());
+		return PaisEntity.build().setId(PaisDomainTmp.getId()).setNombre(PaisDomainTmp.getNombre());
 	}
 	
 	
