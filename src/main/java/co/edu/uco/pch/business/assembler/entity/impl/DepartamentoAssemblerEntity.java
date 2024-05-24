@@ -1,11 +1,12 @@
 package co.edu.uco.pch.business.assembler.entity.impl;
 
 
-import co.edu.uco.pch.business.assembler.dto.AssemblerDTO;
+import static co.edu.uco.pch.crosscutting.helpers.ObjectHelper.getObjectHelper;
+
+
 import co.edu.uco.pch.business.assembler.entity.AssemblerEntity;
 import co.edu.uco.pch.business.domain.DepartamentoDomain;
 import co.edu.uco.pch.business.domain.PaisDomain;
-import co.edu.uco.pch.dto.DepartamentoDTO;
 import co.edu.uco.pch.entity.DepartamentoEntity;
 import co.edu.uco.pch.entity.PaisEntity;
 
@@ -23,14 +24,16 @@ public class DepartamentoAssemblerEntity implements AssemblerEntity<Departamento
 	}
 	@Override
 	public DepartamentoDomain toDomain(DepartamentoEntity data) {
-		// TODO Auto-generated method stub
-		return null;
+		var DepartamentoEntityTmp = getObjectHelper().obtenerValorDefecto(data, DepartamentoEntity.build());
+		var paisDomain = paisAssembler.toDomain(DepartamentoEntityTmp.getPais());
+		return DepartamentoDomain.build(DepartamentoEntityTmp.getid(),DepartamentoEntityTmp.getNombre() , paisDomain);
 	}
 
 	@Override
 	public DepartamentoEntity toEntity(DepartamentoDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+		var DepartamentoDomainTmp = getObjectHelper().obtenerValorDefecto(domain, DepartamentoDomain.build());
+		var paisEntity = paisAssembler.toEntity(DepartamentoDomainTmp.getPais());
+		return DepartamentoEntity.build().setid(DepartamentoDomainTmp.getId()).setNombre(DepartamentoDomainTmp.getNombre()).setPais(paisEntity);
 	}
 
 }

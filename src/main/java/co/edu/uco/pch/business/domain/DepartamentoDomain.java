@@ -2,6 +2,7 @@ package co.edu.uco.pch.business.domain;
 
 import java.util.UUID;
 
+import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.pch.crosscutting.helpers.TextHelper;
 import co.edu.uco.pch.crosscutting.helpers.UUIDHelper;
 
@@ -33,13 +34,13 @@ public final class DepartamentoDomain {
 		this.nombre = TextHelper.applyTrim(nombre);
 	}
 	
-	
+	private void setPais(PaisDomain pais) {
+		this.pais = ObjectHelper.getObjectHelper().obtenerValorDefecto(pais,PaisDomain.build());
+	}
 	public  PaisDomain getPais() {
 		return pais;
 	}
-	private void setPais(PaisDomain pais) {
-		this.pais = pais;
-	}
+	
 	public UUID getId() {
 		return id;
 	}

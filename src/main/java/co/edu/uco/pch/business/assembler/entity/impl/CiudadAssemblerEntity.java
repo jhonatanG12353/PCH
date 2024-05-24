@@ -1,5 +1,7 @@
 package co.edu.uco.pch.business.assembler.entity.impl;
 
+import static co.edu.uco.pch.crosscutting.helpers.ObjectHelper.getObjectHelper;
+
 import co.edu.uco.pch.business.assembler.entity.AssemblerEntity;
 import co.edu.uco.pch.business.domain.CiudadDomain;
 import co.edu.uco.pch.business.domain.DepartamentoDomain;
@@ -21,14 +23,16 @@ public class CiudadAssemblerEntity  implements AssemblerEntity<CiudadDomain, Ciu
 
 	@Override
 	public CiudadDomain toDomain(CiudadEntity data) {
-		// TODO Auto-generated method stub
-		return null;
+		var CiudadEntityTmp = getObjectHelper().obtenerValorDefecto(data, CiudadEntity.build());
+		var departamentoDomain = departamentoAssembler.toDomain(CiudadEntityTmp.getDepartamento());
+		return CiudadDomain.build(CiudadEntityTmp.getid(),CiudadEntityTmp.getNombre() , departamentoDomain);
 	}
 
 	@Override
 	public CiudadEntity toEntity(CiudadDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+		var ciudadDomainTmp = getObjectHelper().obtenerValorDefecto(domain, CiudadDomain.build());
+		var departamentoEntity = departamentoAssembler.toEntity(ciudadDomainTmp.getDepartamento());
+		return CiudadEntity.build().setid(ciudadDomainTmp.getId()).setNombre(ciudadDomainTmp.getNombre()).setDepartamento(departamentoEntity);
 	}
 
 }

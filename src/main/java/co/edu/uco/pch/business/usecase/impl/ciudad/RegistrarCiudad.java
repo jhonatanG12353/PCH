@@ -2,6 +2,7 @@ package co.edu.uco.pch.business.usecase.impl.ciudad;
 
 import java.util.UUID;
 
+
 import co.edu.uco.pch.business.assembler.entity.impl.DepartamentoAssemblerEntity;
 import co.edu.uco.pch.business.domain.CiudadDomain;
 import co.edu.uco.pch.business.usecase.UseCaseWithoutReturn;
@@ -34,27 +35,29 @@ public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain>
 		//3. validar quye no exista otra ciudad con el mismop identificador
 		var ciudadEntity = CiudadEntity.build().setid(generarIdentificadorCiudad()).setNombre(data.getNombre()).setDepartamento(DepartamentoAssemblerEntity.getinstace().toEntity(data.getDepartamento()));
 		//4. guardar la nueva ciudad
-
+		
 		factory.getCiudadDAO().crear(ciudadEntity);
 		
 	}
 	
 	private final UUID generarIdentificadorCiudad() {
-		UUID id = UUIDHelper.generarUUIDAleatorio();
+		UUID id = UUIDHelper.generarUUIDAleatorio() ;
 		boolean existeId= true;
 		while(existeId) {
 			id  = UUIDHelper.generarUUIDAleatorio();
 			var ciudadEntity = CiudadEntity.build().setid(id);
-			var resultados = factory.getCiudadDAO().consultar(null);
+			var resultados = factory.getCiudadDAO().consultar(ciudadEntity);
 			existeId = !resultados.isEmpty();
 		}
 		return id;
 	}
+	
 	private final void validarCiudadMismoNombreMismoDepartamento (final String nombreCiudad, final UUID idDepartamento){
 		var ciudadEntity = CiudadEntity.build().setNombre(nombreCiudad).setDepartamento(DepartamentoEntity.build().setid(idDepartamento));
 		var resultados = factory.getCiudadDAO().consultar(ciudadEntity);
 		if(!resultados.isEmpty()) {
 			var mensajeUsuario = "Ya existe una ciudad con el nombre \"${1}\" asociado al departamento deseado";
+			throw new BusinessPCHException(mensajeUsuario);
 		}
 	}
 

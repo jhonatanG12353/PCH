@@ -1,5 +1,7 @@
 package co.edu.uco.pch.business.assembler.dto.impl;
 
+import static co.edu.uco.pch.crosscutting.helpers.ObjectHelper.getObjectHelper;
+
 import co.edu.uco.pch.business.assembler.dto.AssemblerDTO;
 import co.edu.uco.pch.business.domain.DepartamentoDomain;
 import co.edu.uco.pch.business.domain.PaisDomain;
@@ -20,15 +22,16 @@ public class DepartamentoAssemblerDTO implements AssemblerDTO<DepartamentoDomain
 	}
 	@Override
 	public DepartamentoDomain toDomain(DepartamentoDTO data) {
-		
-		//return DepartamentoDomain.build(data.getid(),data.getNombre() , paisAssembler);
-		return null;
+		var DepartamentoDtoTmp = getObjectHelper().obtenerValorDefecto(data, DepartamentoDTO.build());
+		var paisDomain = paisAssembler.toDomain(DepartamentoDtoTmp.getPais());
+		return DepartamentoDomain.build(DepartamentoDtoTmp.getid(),DepartamentoDtoTmp.getNombre() , paisDomain);
 	}
 
 	@Override
 	public DepartamentoDTO toDTO(DepartamentoDomain domain) {
-		
-		return DepartamentoDTO.build().setid(domain.getId()).setNombre(domain.getNombre());
+		var DepartamentoDomainTmp = getObjectHelper().obtenerValorDefecto(domain, DepartamentoDomain.build());
+		var paisDTO = paisAssembler.toDTO(DepartamentoDomainTmp.getPais());
+		return DepartamentoDTO.build().setid(DepartamentoDomainTmp.getId()).setNombre(DepartamentoDomainTmp.getNombre()).setPais(paisDTO);
 	}
 
 

@@ -2,6 +2,7 @@ package co.edu.uco.pch.business.domain;
 
 import java.util.UUID;
 
+import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.pch.crosscutting.helpers.TextHelper;
 import co.edu.uco.pch.crosscutting.helpers.UUIDHelper;
 
@@ -33,7 +34,9 @@ public final class CiudadDomain {
 	private void setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
 	}
-	
+	private void setDepartamento(final DepartamentoDomain departamento) {
+		this.departamento = ObjectHelper.getObjectHelper().obtenerValorDefecto(departamento,DepartamentoDomain.build());
+	}
 	public UUID getId() {
 		return id;
 	}
@@ -43,8 +46,6 @@ public final class CiudadDomain {
 	public DepartamentoDomain getDepartamento() {
 		return departamento;
 	}
-	private void setDepartamento(DepartamentoDomain departamento) {
-		this.departamento = departamento;
-	}
+	
 	
 }

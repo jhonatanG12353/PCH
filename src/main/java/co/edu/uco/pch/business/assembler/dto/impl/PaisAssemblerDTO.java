@@ -3,7 +3,7 @@ package co.edu.uco.pch.business.assembler.dto.impl;
 import co.edu.uco.pch.business.assembler.dto.AssemblerDTO;
 import co.edu.uco.pch.business.domain.PaisDomain;
 import co.edu.uco.pch.dto.PaisDTO;
-//import static  co.edu.uco.pch.crosscutting.helpers.ObjectHelper.getObjectHelper;;
+import static  co.edu.uco.pch.crosscutting.helpers.ObjectHelper.getObjectHelper;
 
 public final class PaisAssemblerDTO implements AssemblerDTO< PaisDomain, PaisDTO> {
 	
@@ -19,13 +19,14 @@ public final class PaisAssemblerDTO implements AssemblerDTO< PaisDomain, PaisDTO
 
 	@Override
 	public final  PaisDomain toDomain(final PaisDTO data) {
-		//var paisDtoTmp = obtener;
-		return PaisDomain.build(data.getid(),data.getNombre());
+		var paisDtoTmp = getObjectHelper().obtenerValorDefecto(data, PaisDTO.build());
+		return PaisDomain.build(paisDtoTmp.getid(),paisDtoTmp.getNombre());
 	}
 
 	@Override
 	public final PaisDTO toDTO(final PaisDomain domain) {
-		return PaisDTO.build().setid(domain.getId()).setNombre(domain.getNombre());
+		var PaisDomainTmp = getObjectHelper().obtenerValorDefecto(domain, PaisDomain.build());
+		return PaisDTO.build().setid(PaisDomainTmp.getId()).setNombre(PaisDomainTmp.getNombre());
 	}
 	
 

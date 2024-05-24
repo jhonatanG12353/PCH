@@ -7,13 +7,13 @@ public class BusinessPCHException extends PCHException{
 
 	private static final long serialVersionUID = -772840292783193403L;
 	
-	protected BusinessPCHException(String mensajeTecnico, String mensajeUsuario, Lugar lugar, Throwable excepcionRaiz) {
+	public BusinessPCHException(String mensajeTecnico, String mensajeUsuario, Lugar lugar, Throwable excepcionRaiz) {
 		super(mensajeTecnico, mensajeUsuario, lugar, excepcionRaiz);
 	}
 	public BusinessPCHException(String mensajeTecnico, String mensajeUsuario) {
 		super(mensajeTecnico, mensajeUsuario, Lugar.BUSINESS);
 	}
-	protected BusinessPCHException(String mensajeTecnico) {
+	public BusinessPCHException(String mensajeTecnico) {
 		super(mensajeTecnico, Lugar.BUSINESS);
 	}
 	

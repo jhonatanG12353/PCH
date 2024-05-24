@@ -1,5 +1,7 @@
 package co.edu.uco.pch.business.assembler.entity.impl;
 
+import static co.edu.uco.pch.crosscutting.helpers.ObjectHelper.getObjectHelper;
+
 import co.edu.uco.pch.business.assembler.entity.AssemblerEntity;
 import co.edu.uco.pch.business.domain.PaisDomain;
 import co.edu.uco.pch.entity.PaisEntity;
@@ -18,14 +20,14 @@ public class PaisAssemblerEntity  implements AssemblerEntity<PaisDomain,PaisEnti
 
 	@Override
 	public PaisDomain toDomain(PaisEntity data) {
-		// TODO Auto-generated method stub
-		return null;
+		var paisEntityTmp = getObjectHelper().obtenerValorDefecto(data, PaisEntity.build());
+		return PaisDomain.build(paisEntityTmp.getid(),paisEntityTmp.getNombre());
 	}
 
 	@Override
 	public PaisEntity toEntity(PaisDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+		var PaisDomainTmp = getObjectHelper().obtenerValorDefecto(domain, PaisDomain.build());
+		return PaisEntity.build().setid(PaisDomainTmp.getId()).setNombre(PaisDomainTmp.getNombre());
 	}
 	
 	
