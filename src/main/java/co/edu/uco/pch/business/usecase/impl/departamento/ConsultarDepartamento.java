@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import co.edu.uco.pch.business.assembler.dto.impl.DepartamentoAssemblerDTO;
+
 import co.edu.uco.pch.business.assembler.entity.impl.DepartamentoAssemblerEntity;
 import co.edu.uco.pch.business.assembler.entity.impl.PaisAssemblerEntity;
 import co.edu.uco.pch.business.domain.DepartamentoDomain;
@@ -16,12 +16,10 @@ import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.pch.crosscutting.helpers.TextHelper;
 import co.edu.uco.pch.data.dao.factory.DAOFactory;
-import co.edu.uco.pch.dto.DepartamentoDTO;
-import co.edu.uco.pch.entity.CiudadEntity;
 import co.edu.uco.pch.entity.DepartamentoEntity;
 import co.edu.uco.pch.entity.PaisEntity;
 
-public class ConsultarDepartamento implements  UseCaseWithReturn<DepartamentoDomain ,DepartamentoDTO>{
+public class ConsultarDepartamento implements  UseCaseWithReturn<DepartamentoDomain ,List<DepartamentoDomain>>{
 
 private DAOFactory factory;
 	
@@ -34,21 +32,14 @@ private DAOFactory factory;
 		 this.factory = factory;
 	}
 	@Override
-	public DepartamentoDTO execute(DepartamentoDomain data) {
+	public List<DepartamentoDomain> execute(DepartamentoDomain data) {
 		validarIntegridadDato(data);
 		validardepartamentoMismoNombreMismoPais(data.getNombre(), data.getPais().getId());
 		var departamentoEntity = DepartamentoEntity.build().setId(data.getId()).setNombre(data.getNombre()).setPais(PaisAssemblerEntity.getinstace().toEntity(data.getPais()));
+		var departamentoToDomain = convertToListDomain(factory.getDepartamentoDAO().consultar(departamentoEntity));
+		return departamentoToDomain;
+	}
 
-		//return factory.getCiudadDAO().consultar(ciudadEntity);
-		return null;
-	}
-	public  final List<DepartamentoDTO>  convertToListDTO(final List<DepartamentoDomain> dto){
-		List<DepartamentoDTO> resultados = new ArrayList<>();
-		for (int i = 0; i < dto.size(); i++) {
-			resultados.add(DepartamentoAssemblerDTO.getinstace().toDTO(dto.get(i)));
-		}		
-		return resultados;
-	}
 	public  final List<DepartamentoDomain>  convertToListDomain(final List<DepartamentoEntity> dto){
 		List<DepartamentoDomain> resultados = new ArrayList<>();
 		for (int i = 0; i < dto.size(); i++) {

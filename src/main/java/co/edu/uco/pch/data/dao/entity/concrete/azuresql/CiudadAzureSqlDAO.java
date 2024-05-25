@@ -66,9 +66,9 @@ public final class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO 
 		
 				            while (resultadoConsulta.next()) {
 				                CiudadEntity ciudad = new CiudadEntity();
-				                ciudad.setid((UUID) resultadoConsulta.getObject("id"));
-				                ciudad.setNombre(resultadoConsulta.getString("nombre"));
-				                ciudad.setDepartamento((DepartamentoEntity) resultadoConsulta.getObject("departamento")); 
+				                ciudad.setid((UUID) resultadoConsulta.getObject(" id "));
+				                ciudad.setNombre(resultadoConsulta.getString(" nombre "));
+				                ciudad.setDepartamento((DepartamentoEntity) resultadoConsulta.getObject(" departamento ")); 
 				                
 				                resultado.add(ciudad);
 				            }

@@ -13,6 +13,9 @@ public class CiudadDTO {
 	
 	private CiudadDTO() {
 		super();
+		setid(UUIDHelper.generarUUIDDefecto());
+		setNombre(TextHelper.EMPTY);
+		setDepartamento(DepartamentoDTO.build());
 	}
 	
 	private CiudadDTO(final UUID id, final String nombre, final DepartamentoDTO departamento) {

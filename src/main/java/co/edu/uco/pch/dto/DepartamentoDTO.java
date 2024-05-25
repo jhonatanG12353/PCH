@@ -14,6 +14,9 @@ public class DepartamentoDTO {
 	
 	private DepartamentoDTO() {
 		super();
+		setid(UUIDHelper.generarUUIDDefecto());
+		setNombre(TextHelper.EMPTY);
+		setPais(PaisDTO.build());
 	}
 	private DepartamentoDTO(final UUID id, final String nombre, final PaisDTO pais) {
 		setid(id);

@@ -17,7 +17,7 @@ import co.edu.uco.pch.data.dao.factory.DAOFactory;
 import co.edu.uco.pch.dto.PaisDTO;
 import co.edu.uco.pch.entity.PaisEntity;
 
-public class ConsultarPais implements  UseCaseWithReturn<PaisDomain ,PaisDTO>{
+public class ConsultarPais implements  UseCaseWithReturn<PaisDomain ,List<PaisDomain>>{
 
 private DAOFactory factory;
 	
@@ -30,13 +30,12 @@ private DAOFactory factory;
 		 this.factory = factory;
 	}
 	@Override
-	public PaisDTO execute(PaisDomain data) {
+	public List<PaisDomain> execute(PaisDomain data) {
 		validarIntegridadDato(data);
 		validarPaisMismoNombre(data.getNombre());
 		var paisEntity = PaisEntity.build().setId(data.getId()).setNombre(data.getNombre());
-
-		//return factory.getCiudadDAO().consultar(ciudadEntity);
-		return null;
+		var paisToDomain = convertToListDomain(factory.getPaisDAO().consultar(paisEntity));	
+		return paisToDomain;
 	}
 	public  final List<PaisDTO>  convertToListDTO(final List<PaisDomain> dto){
 		List<PaisDTO> resultados = new ArrayList<>();
