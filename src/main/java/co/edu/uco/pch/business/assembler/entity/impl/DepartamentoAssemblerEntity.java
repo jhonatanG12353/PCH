@@ -27,16 +27,16 @@ public class DepartamentoAssemblerEntity implements AssemblerEntity<Departamento
 	}
 	@Override
 	public DepartamentoDomain toDomain(DepartamentoEntity data) {
-		var DepartamentoEntityTmp = getObjectHelper().obtenerValorDefecto(data, DepartamentoEntity.build());
-		var paisDomain = paisAssembler.toDomain(DepartamentoEntityTmp.getPais());
-		return DepartamentoDomain.build(DepartamentoEntityTmp.getId(),DepartamentoEntityTmp.getNombre() , paisDomain);
+		//var DepartamentoEntityTmp = getObjectHelper().obtenerValorDefecto(data, DepartamentoEntity.build());
+		var paisDomain = paisAssembler.toDomain(data.getPais());
+		return DepartamentoDomain.build(data.getId(),data.getNombre() , paisDomain);
 	}
 
 	@Override
 	public DepartamentoEntity toEntity(DepartamentoDomain domain) {
-		var DepartamentoDomainTmp = getObjectHelper().obtenerValorDefecto(domain, DepartamentoDomain.build());
-		var paisEntity = paisAssembler.toEntity(DepartamentoDomainTmp.getPais());
-		return DepartamentoEntity.build().setId(DepartamentoDomainTmp.getId()).setNombre(DepartamentoDomainTmp.getNombre()).setPais(paisEntity);
+		//var DepartamentoDomainTmp = getObjectHelper().obtenerValorDefecto(domain, DepartamentoDomain.build());
+		var paisEntity = paisAssembler.toEntity(domain.getPais());
+		return DepartamentoEntity.build().setId(domain.getId()).setNombre(domain.getNombre()).setPais(paisEntity.setId(domain.getPais().getId()));
 	}
 
 	@Override

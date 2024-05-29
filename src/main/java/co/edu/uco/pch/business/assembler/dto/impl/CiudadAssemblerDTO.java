@@ -1,6 +1,6 @@
 package co.edu.uco.pch.business.assembler.dto.impl;
 
-import static co.edu.uco.pch.crosscutting.helpers.ObjectHelper.getObjectHelper;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +27,17 @@ public class CiudadAssemblerDTO implements AssemblerDTO<CiudadDomain, CiudadDTO>
 	
 	@Override
 	public CiudadDomain toDomain(CiudadDTO data) {
-		var CiudadDtoTmp = getObjectHelper().obtenerValorDefecto(data, CiudadDTO.build());
-		var departamentoDomain = departamentoAssembler.toDomain(CiudadDtoTmp.getDepartamento());
-		return CiudadDomain.build(CiudadDtoTmp.getid(),CiudadDtoTmp.getNombre() , departamentoDomain);
+		//var CiudadDtoTmp = getObjectHelper().obtenerValorDefecto(data, CiudadDTO.build());
+		//var departamentoDomain = departamentoAssembler.toDomain(data.getDepartamento());
+		var datodepartamento = DepartamentoDTO.build().setid(data.getDepartamento().getid()).setNombre(data.getDepartamento().getNombre()).setPais(data.getDepartamento().getPais()) ;
+		var departamentoDomain = DepartamentoAssemblerDTO.getinstace().toDomain(datodepartamento);
+		return CiudadDomain.build(data.getid(),data.getNombre() , departamentoDomain);
 	}
 
 	@Override
 	public  CiudadDTO toDTO(CiudadDomain domain) {
-		var ciudadDomainTmp = getObjectHelper().obtenerValorDefecto(domain, CiudadDomain.build());
-		var departamentoDTO = departamentoAssembler.toDTO(ciudadDomainTmp.getDepartamento());
-		return CiudadDTO.build().setid(ciudadDomainTmp.getId()).setNombre(ciudadDomainTmp.getNombre()).setDepartamento(departamentoDTO);
+		var departamentoDTO = departamentoAssembler.toDTO(domain.getDepartamento());
+		return CiudadDTO.build().setid(domain.getId()).setNombre(domain.getNombre()).setDepartamento(departamentoDTO);
 	}
 
 	@Override
@@ -47,8 +48,11 @@ public class CiudadAssemblerDTO implements AssemblerDTO<CiudadDomain, CiudadDTO>
 
 	@Override
 	public List<CiudadDTO> toDTOCollection(List<CiudadDomain> domainCollection) {
-		var dtoCollectionTmp = ObjectHelper.getObjectHelper().obtenerValorDefecto(domainCollection, new ArrayList<CiudadDomain>());		
-		return dtoCollectionTmp.stream().map(this::toDTO).toList();
+		List<CiudadDTO> resultados = new ArrayList<>();
+		for (int i = 0; i < domainCollection.size(); i++) {
+			resultados.add(CiudadAssemblerDTO.getinstace().toDTO(domainCollection.get(i)));
+		}		
+		return resultados;
 	}
 	
 

@@ -26,6 +26,9 @@ public class DepartamentoEntity {
 	public static final DepartamentoEntity build() {
 		return new DepartamentoEntity();
 	}
+	public static final DepartamentoEntity build(final UUID id, final String nombre, final PaisEntity pais) {
+		return new DepartamentoEntity(id,nombre,pais);
+	}
 
 	public final UUID getId() {
 		return id;
@@ -50,7 +53,8 @@ public class DepartamentoEntity {
 	}
 
 	public final DepartamentoEntity setPais(final PaisEntity pais) {
-		this.pais = ObjectHelper.getObjectHelper().obtenerValorDefecto(pais, new PaisEntity());
+		//this.pais = ObjectHelper.getObjectHelper().obtenerValorDefecto(pais, new PaisEntity());
+		this.pais = pais;
 		return this;
 	}
 

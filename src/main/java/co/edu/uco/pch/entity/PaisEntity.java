@@ -23,6 +23,9 @@ public class PaisEntity {
 	public static final PaisEntity build() {
 		return new PaisEntity();
 	}
+	public static final PaisEntity build(final UUID id, final String nombre) {
+		return new PaisEntity(id, nombre);
+	}
 
 	public final UUID getId() {
 		return id;

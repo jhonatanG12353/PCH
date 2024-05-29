@@ -26,11 +26,11 @@ public final class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO 
 	}
 
 	@Override
-	public final void crear(CiudadEntity data) {
+	public final void crear(CiudadEntity data) { 
 		final StringBuilder sentenciaSql = new StringBuilder();
 		
-		sentenciaSql.append("INSERT INTO Ciudad (id, nombre, departamento) ");
-		sentenciaSql.append("SELECT ? , ? ,?");
+		sentenciaSql.append("INSERT INTO Ciudad ( id , nombre , departamento ) ");
+		sentenciaSql.append(" VAlUES ( ? , ? , ? )");
 		
 		try (final PreparedStatement sentenciaSqlPreparada = getConexion().prepareStatement(sentenciaSql.toString())){
 			sentenciaSqlPreparada.setObject(1, data.getid());
@@ -51,24 +51,25 @@ public final class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO 
 		}
 		
 	}
-
+	
 	@Override
 	public final List<CiudadEntity> consultar(CiudadEntity data) {
 		List<CiudadEntity> resultado = new ArrayList<>();
+		var parametros = new ArrayList<Object>();
 		
-		String sentenciaSql = formarSentenciaConsulta(data);
-			
+		String sentenciaSql = formarSentenciaConsulta(data,parametros);
 			
 	
 				try (final PreparedStatement sentenciaPreparada = getConexion().prepareStatement(sentenciaSql)) {
-			       								        
+					colocarParametrosConsulta(sentenciaPreparada, parametros );					        
 				        try (final ResultSet resultadoConsulta = sentenciaPreparada.executeQuery()) {
 		
 				            while (resultadoConsulta.next()) {
 				                CiudadEntity ciudad = new CiudadEntity();
-				                ciudad.setid((UUID) resultadoConsulta.getObject(" id "));
-				                ciudad.setNombre(resultadoConsulta.getString(" nombre "));
-				                ciudad.setDepartamento((DepartamentoEntity) resultadoConsulta.getObject(" departamento ")); 
+				                ciudad.setid( UUIDHelper.convertToUUID(resultadoConsulta.getString("id")) );
+				                ciudad.setNombre(resultadoConsulta.getString("nombre"));
+				                DepartamentoEntity departamento = new DepartamentoEntity();
+				                departamento.setId( UUIDHelper.convertToUUID(resultadoConsulta.getString("id")) );
 				                
 				                resultado.add(ciudad);
 				            }
@@ -87,15 +88,32 @@ public final class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO 
 			
 		    return resultado;
 		}
-	private final String formarSentenciaConsulta(CiudadEntity data) {
-		final var parametros = new ArrayList<Object>();
+	private final void colocarParametrosConsulta(final PreparedStatement sentenciaPreparada, final List<Object> parametros ) {
+		try {
+			for (int indice = 0; indice < parametros.size(); indice++) {
+				sentenciaPreparada.setObject(indice + 1 , parametros.get(indice));
+			}
+			
+		}catch(final SQLException excepcion) {
+			var mensajeUsuario = "Se ha presentado un problema tratando de consultar las ciudades...";
+			var mensajeTecnico = "Se ha presentado un problema tratando de consultar las ciudades...";
+			throw new DataPCHException(mensajeUsuario, mensajeTecnico, excepcion);
+		}
+		catch(final Exception excepcion) {
+			var mensajeUsuario = "Se ha presentado un problema tratando de consultar las ciudades...";
+			var mensajeTecnico =  "Se ha presentado un problema tratando de consultar las ciudades...";
+			throw new DataPCHException(mensajeUsuario, mensajeTecnico, excepcion);
+		}
+	}
+	private final String formarSentenciaConsulta(CiudadEntity data , List<Object> parametros) {
+		
 		final StringBuilder sentenciaSql = new StringBuilder();
 		String operadorCondicional ="WHERE";
 		
-		sentenciaSql.append("SELECT id, nombre, departamento FROM Ciudad ");
+		sentenciaSql.append("SELECT id , nombre , departamento FROM Ciudad ");
 		if(!ObjectHelper.isNull(data)) {
 			
-			if(!ObjectHelper.esNulooVacio(data.getid())) {
+			if(!ObjectHelper.isNull(data.getid())&& !UUIDHelper.isDefault(data.getid())) {
 				sentenciaSql.append(operadorCondicional).append(" id = ? ");
 				operadorCondicional = " AND";
 				parametros.add(data.getid());
@@ -106,12 +124,12 @@ public final class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO 
 				parametros.add(data.getNombre());
 			}
 			
-			if(!UUIDHelper.isNull(data.getDepartamento().getId())) {
+			if(!UUIDHelper.isNull(data.getDepartamento().getId())&& !UUIDHelper.isDefault(data.getDepartamento().getId())) {
 				sentenciaSql.append(operadorCondicional).append(" departamento = ? ");
-				parametros.add(data.getDepartamento());
+				parametros.add(data.getDepartamento().getId());
 			}
 		}
-		sentenciaSql.append("ORDER BY codigo");
+		sentenciaSql.append("ORDER BY nombre ");
 		
 		return sentenciaSql.toString();
 

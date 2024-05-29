@@ -37,7 +37,7 @@ public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain>
 		// 2. Validar que no exista otra ciudad con el mismo nombre para el mismo departamento
 		validarCiudadMismoNombreMismoDepartamento(data.getNombre(), data.getDepartamento().getId());
 		//3. validar quye no exista otra ciudad con el mismop identificador
-		var ciudadEntity = CiudadEntity.build().setid(generarIdentificadorCiudad()).setNombre(data.getNombre()).setDepartamento(DepartamentoAssemblerEntity.getinstace().toEntity(data.getDepartamento()));
+		var ciudadEntity = CiudadEntity.build().setid(UUIDHelper.generarUUIDAleatorio()).setNombre(data.getNombre()).setDepartamento(DepartamentoAssemblerEntity.getinstace().toEntity(data.getDepartamento()));
 		//4. guardar la nueva ciudad
 		
 		factory.getCiudadDAO().crear(ciudadEntity);
@@ -70,7 +70,7 @@ public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain>
 		if(!ObjectHelper.esNulooVacio(dato)) {
 			validarLongitud(dato.getNombre());
 			validarObligatoriedad(dato.getNombre());
-			validarFormato(dato.getNombre());
+			//validarFormato(dato.getNombre());
 		}
 		if(!UUIDHelper.isNull(dato.getId())) {
 			String uuidString = dato.getId().toString();
@@ -84,7 +84,7 @@ public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain>
 	}
 	
 	private final void validarLongitud(final String dato) {
-		if(TextHelper.longitudMaximaValida(dato,50)) {
+		if(!TextHelper.longitudMaximaValida(dato,50)) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00044);
 			throw new BusinessPCHException(mensajeUsuario);
 		}
@@ -95,12 +95,7 @@ public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain>
 			throw new BusinessPCHException(mensajeUsuario);
 		}
 	}
-	private final void validarFormato(final String dato) {
-		if(!TextHelper.contieneSoloLetras(dato)) {
-			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00046);
-			throw new BusinessPCHException(mensajeUsuario);
-		}
-	}
+
 	public static boolean validarUUID(String s) {
         try {
             UUID.fromString(s);

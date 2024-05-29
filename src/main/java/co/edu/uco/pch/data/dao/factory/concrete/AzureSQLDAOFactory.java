@@ -24,17 +24,17 @@ public final class AzureSQLDAOFactory extends SqlConnection implements DAOFactor
 	}
 
 	public void abrirConexion() {
-		final String connectionUrl = "jdbc:sqlserver://wednesday.database.windows.net:1433;databaseName=friday;user=fridayDmlUser;password=fr1d4yus3r!";
+		final String connectionUrl = "jdbc:sqlserver://spaonline-server.database.windows.net:1433;database=SpaOnline;user=administrador@spaonline-server;password=Mateoandres12353;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
 		try {
 			setConexion(DriverManager.getConnection(connectionUrl));
 		} catch (final SQLException excepcion) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00033);
+			var mensajeTecnico = "Se ha presentado un problema tratando de obtener la conexión con la base de datos spa online en el servidor de bases de datos Spa Online.database.windows.net. Por favor revise la traza de errores para identificar y solucionar el problema...";
 
 			throw new DataPCHException(mensajeTecnico, mensajeUsuario, excepcion);
 		} catch (final Exception excepcion) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00034);
+			var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de obtener la conexión con la base de datos Spa online en el servidor de bases de datos spaonline.database.windows.net. Por favor revise la traza de errores para identificar y solucionar el problema...";
 
 			throw new DataPCHException(mensajeTecnico, mensajeUsuario, excepcion);
 		}
@@ -75,4 +75,5 @@ public final class AzureSQLDAOFactory extends SqlConnection implements DAOFactor
 		return new CiudadAzureSqlDAO(getConexion());
 	}
 
+	
 }

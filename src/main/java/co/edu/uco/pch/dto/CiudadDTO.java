@@ -13,7 +13,7 @@ public class CiudadDTO {
 	
 	private CiudadDTO() {
 		super();
-		setid(UUIDHelper.generarUUIDDefecto());
+	setid(UUIDHelper.generarUUIDDefecto());
 		setNombre(TextHelper.EMPTY);
 		setDepartamento(DepartamentoDTO.build());
 	}

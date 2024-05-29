@@ -4,24 +4,24 @@ import co.edu.uco.pch.business.assembler.dto.impl.CiudadAssemblerDTO;
 import co.edu.uco.pch.business.domain.CiudadDomain;
 import co.edu.uco.pch.business.facade.FacadeWithoutReturn;
 import co.edu.uco.pch.business.usecase.UseCaseWithoutReturn;
-import co.edu.uco.pch.business.usecase.impl.ciudad.EliminarCiudad;
+import co.edu.uco.pch.business.usecase.impl.ciudad.ModificarCiudad;
 import co.edu.uco.pch.crosscutting.exceptions.PCHException;
 import co.edu.uco.pch.crosscutting.exceptions.custom.BusinessPCHException;
 import co.edu.uco.pch.data.dao.factory.DAOFactory;
 import co.edu.uco.pch.dto.CiudadDTO;
 
-public class EliminarCiudadFacade implements FacadeWithoutReturn<CiudadDTO>{
+public class ModificarCiudadFacade implements FacadeWithoutReturn<CiudadDTO> {
 	
 	private DAOFactory daoFactory;
 	
-	public EliminarCiudadFacade () {
+	public ModificarCiudadFacade () {
 		daoFactory = DAOFactory.getFactory();
 	}
 	@Override
-	public void execute(CiudadDTO dto) {
+	public void execute(final CiudadDTO dto) {
 		daoFactory.iniciarTransaccion();
 		try {
-			UseCaseWithoutReturn<CiudadDomain> useCase = new EliminarCiudad(daoFactory);
+			UseCaseWithoutReturn<CiudadDomain> useCase = new ModificarCiudad(daoFactory);
 			var ciudadDomain = CiudadAssemblerDTO.getinstace().toDomain(dto);
 			useCase.execute(ciudadDomain);
 			
@@ -31,13 +31,12 @@ public class EliminarCiudadFacade implements FacadeWithoutReturn<CiudadDTO>{
 			throw exception;
 		}catch (final Exception excepcion) {
 			daoFactory.cancelarTransaccion();
-			var mensajeUsuario= "Se ha presentado un problema tratando de ingresar la informacion de la ciudad";
-			var mensajeTecnico = "Se ha presentado un problema  INESPERADO tratando de ingresar la informacion de la ciudad";
+			var mensajeUsuario= "Se ha presentado un problema tratando de modificar la informacion de la ciudad";
+			var mensajeTecnico = "Se ha presentado un problema  INESPERADO tratando de modificar la informacion de la ciudad";
 			throw new BusinessPCHException(mensajeUsuario, mensajeTecnico);
 		} finally{
 			daoFactory.cerrarConexion();
 		}
-		
-	}
 
+	} 
 }

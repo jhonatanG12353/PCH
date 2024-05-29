@@ -25,6 +25,9 @@ public class CiudadEntity {
 	public static final CiudadEntity build () {
 		return new CiudadEntity();
 	} 
+	public static final CiudadEntity build (final UUID id, final String nombre, final DepartamentoEntity departamento) {
+		return new CiudadEntity(id, nombre, departamento);
+	} 
 	public final CiudadEntity setid(final UUID id) {
 		this.id = UUIDHelper.obtenerValorDefecto(id);
 		return this;
@@ -34,7 +37,8 @@ public class CiudadEntity {
 		return this;
 	}
 	public final CiudadEntity setDepartamento(final DepartamentoEntity departamento) {
-		this.departamento = ObjectHelper.getObjectHelper().obtenerValorDefecto(departamento, new DepartamentoEntity());
+		//this.departamento = ObjectHelper.getObjectHelper().obtenerValorDefecto(departamento, new DepartamentoEntity());
+		this.departamento = departamento;
 		return this;
 	}
 	public final UUID getid() {

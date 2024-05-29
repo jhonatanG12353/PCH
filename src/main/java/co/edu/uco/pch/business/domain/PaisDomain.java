@@ -25,7 +25,8 @@ public final class PaisDomain {
 	}
 	
 	private void setId(final UUID id) {
-		this.id = UUIDHelper.obtenerValorDefecto(id);
+		//habia un helper, pero se quitar para revisar si por eso sale nulo
+		this.id = id;
 	}
 	private void setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);

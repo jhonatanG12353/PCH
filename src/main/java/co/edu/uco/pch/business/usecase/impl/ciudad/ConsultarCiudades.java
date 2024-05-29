@@ -18,7 +18,7 @@ import co.edu.uco.pch.entity.DepartamentoEntity;
 
 public class ConsultarCiudades implements  UseCaseWithReturn<CiudadDomain , List<CiudadDomain>> {
 
-private DAOFactory factory;
+	private DAOFactory factory;
 	
 	public ConsultarCiudades (final DAOFactory factory){
 		 if(ObjectHelper.isNull(factory)) {
@@ -43,7 +43,7 @@ private DAOFactory factory;
 	private final void validarCiudadMismoNombreMismoDepartamento (final String nombreCiudad, final UUID idDepartamento){
 		var ciudadEntity = CiudadEntity.build().setNombre(nombreCiudad).setDepartamento(DepartamentoEntity.build().setId(idDepartamento));
 		var resultados = factory.getCiudadDAO().consultar(ciudadEntity);
-		if(!resultados.isEmpty()) {
+		if(resultados.isEmpty()) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00049);
 			throw new BusinessPCHException(mensajeUsuario);
 		}
@@ -52,23 +52,17 @@ private DAOFactory factory;
 
 	public void validarIntegridadDato(CiudadDomain dato) {
 		if(!ObjectHelper.esNulooVacio(dato)) {
-			//validarLongitud(dato.getNombre());
-			//validarFormato(dato.getNombre());
+			validarLongitud(dato.getNombre());
 		}		
 	}
 	
 	private final void validarLongitud(final String dato) {
-		if(TextHelper.longitudMaximaValida(dato,150)) {
+		if(!TextHelper.longitudMaximaValida(dato,50)) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00050);
 			throw new BusinessPCHException(mensajeUsuario);
 		}
 	}
 	
-	private final void validarFormato(final String dato) {
-		if(!TextHelper.contieneSoloLetras(dato)) {
-			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00051);
-			throw new BusinessPCHException(mensajeUsuario);
-		}
-	}
+
 
 }

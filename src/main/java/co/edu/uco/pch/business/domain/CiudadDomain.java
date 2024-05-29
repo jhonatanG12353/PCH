@@ -35,7 +35,8 @@ public final class CiudadDomain {
 		this.nombre = TextHelper.applyTrim(nombre);
 	}
 	private void setDepartamento(final DepartamentoDomain departamento) {
-		this.departamento = ObjectHelper.getObjectHelper().obtenerValorDefecto(departamento,DepartamentoDomain.build());
+		//this.departamento = ObjectHelper.getObjectHelper().obtenerValorDefecto(departamento,DepartamentoDomain.build());
+		this.departamento = departamento;
 	}
 	public UUID getId() {
 		return id;

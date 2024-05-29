@@ -35,7 +35,8 @@ public final class DepartamentoDomain {
 	}
 	
 	private void setPais(PaisDomain pais) {
-		this.pais = ObjectHelper.getObjectHelper().obtenerValorDefecto(pais,PaisDomain.build());
+		//this.pais = ObjectHelper.getObjectHelper().obtenerValorDefecto(pais,PaisDomain.build());
+		this.pais = pais;
 	}
 	public  PaisDomain getPais() {
 		return pais;

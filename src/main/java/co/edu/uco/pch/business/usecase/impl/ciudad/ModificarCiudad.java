@@ -63,7 +63,7 @@ public class ModificarCiudad implements UseCaseWithoutReturn<CiudadDomain> {
 	}
 	
 	private final void validarLongitud(final String dato) {
-		if(TextHelper.longitudMaximaValida(dato,50)) {
+		if(!TextHelper.longitudMaximaValida(dato,50)) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00056);
 			throw new BusinessPCHException(mensajeUsuario);
 		}

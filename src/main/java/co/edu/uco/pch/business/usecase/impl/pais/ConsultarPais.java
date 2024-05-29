@@ -65,7 +65,6 @@ private DAOFactory factory;
 	public void validarIntegridadDato(PaisDomain dato) {
 		if(!ObjectHelper.esNulooVacio(dato)) {
 			validarLongitud(dato.getNombre());
-			validarFormato(dato.getNombre());
 		}		
 	}
 	
@@ -75,12 +74,6 @@ private DAOFactory factory;
 			throw new BusinessPCHException(mensajeUsuario);
 		}
 	}
-	
-	private final void validarFormato(final String dato) {
-		if(!TextHelper.contieneSoloLetras(dato)) {
-			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00051);
-			throw new BusinessPCHException(mensajeUsuario);
-		}
-	}
+
 
 }
